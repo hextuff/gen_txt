@@ -13,6 +13,7 @@ file slice to b64 txt records
 
 delete records with prefix and key
     python tool.py delete <prefix>
+    
 $ python tool.py add test GetPic.png test
 [*] generate base64 payloads
 [*] 45 records will be create
@@ -24,7 +25,13 @@ $ python tool.py add test GetPic.png test
 ### 下载文件
 
 ```bash
-python .\download.py 098f6bcd4621d373cade4e832627b4f6.test.b477ery.cc getpic.png
+$ python downloader.py
+download file uploaded by gen_txt
+    python downloader.py <url> [out_file_name]
+example:
+    python downloader.py 4464014eislkfjxsb5642451fea512a4.test.b477ery.cc
+    
+$ python downloader.py 098f6bcd4621d373cade4e832627b4f6.test.b477ery.cc getpic.png
 [*] download 098f6bcd4621d373cade4e832627b4f6.test.b477ery.cc
 [*] download f5fa42d1d705a49c30297917812c534f.test.b477ery.cc
 [*] download 2ee72896ac849eca54c2249f5897056d.test.b477ery.cc
