@@ -33,12 +33,17 @@ def add_file(arg: Dict[str, str]):
         print(f"[*] {len(b64)} records will be create")
     except FileNotFoundError:
         print_end_exit(f"[x] file does not exists: {arg['file']}")
-    prefix = hashlib.md5(config.key.encode()).hexdigest()
+    if "key" in arg:
+        key = arg["key"]
+    else:
+        key = config.key
+    start_prefix = hashlib.md5(config.key.encode()).hexdigest()
+    prefix = start_prefix
     print("[*] start to create TXT records")
     for value in tqdm(b64):
         create_txt_record(f"{prefix}.{arg['prefix']}", value)
         prefix = hashlib.md5(value.encode()).hexdigest()
-    print("[!] done.")
+    print(f"[!] done. file url: {start_prefix}.{arg['prefix']}.{config.domain}")
 
 
 def delete_file(arg: Dict[str, str]):
@@ -49,6 +54,7 @@ def delete_file(arg: Dict[str, str]):
         print(f"[*] delete {prefix}.{arg['prefix']}")
         prefix = hashlib.md5(record.Value.encode()).hexdigest()
         record = describe_record_list(f"{prefix}.{arg['prefix']}")
+    print("[!] done.")
 
 
 if __name__ == '__main__':
